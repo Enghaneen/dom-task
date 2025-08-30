@@ -7,17 +7,20 @@ console.log(lengthOfChildren)
 
 const childrenLength=document.body.children.length
 const childrenNodesLength=document.body.childNodes.length
-console.log(childrenLength) //3 because it did not add the text nodes
-console.log(childrenNodesLength)//6 because it added the text nodes
-console.log("the difference is in the .children no text nodes is add to dom tree but in .childNode the text nodes is added ")
+console.log("children.length:", childrenLength);      // excludes text nodes
+console.log("childNodes.length:", childNodesLength); // includes text nodes
+
+const diff = childNodesLength - childrenLength;
+console.log("Difference (childNodes - children):", diff);
+
 
 const firstNode=document.body.childNodes[0]
 
 console.log(firstNode.nodeType)
 console.log(firstNode.nodeName)
 
-const firstParagraph=document.querySelector('p')
-const secondParagraph=document.querySelectorAll('p')[1]
+const firstParagraph = document.getElementsByTagName('p')[0]
+const firstParagraph = document.getElementsByTagName('p')[1]
 
 if(firstParagraph.parentElement === secondParagraph.parentElement){
     console.log("Yes , both are siblings")
@@ -27,9 +30,9 @@ if(firstParagraph.parentElement === secondParagraph.parentElement){
 const allNodes = document.body.childNodes;
 //console.log(allNodes) 
 allNodes.forEach((node, i) => {
-  if (node.nodeType === 3 ) {
-    console.log(`Text node at index ${i}:` , node);
-  } 
+  if (node.nodeType === 3 && node.nodeValue.trim() !== "") {
+    console.log("Unexpected text node:", node, "at index", i);
+  }
 })
 
 //second task
